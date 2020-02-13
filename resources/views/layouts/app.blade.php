@@ -17,14 +17,17 @@
             <ul class="navbar-nav ml-auto">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link active" href="/todos">Todos</a>
-                    {{-- {{-- <a class="nav-item nav-link active" href="#">Features</a> --}}
                     <a class="nav-item nav-link active" href="/new-todos">Create Todos</a>
-                    {{-- <a class="nav-item nav-link active" href="#" tabindex="-1" aria-disabled="true">Disabled</a> --}}
                 </div>
             </ul>
         </div>
       </nav>
     <div class="container">
+        @if(session()->has('success'))
+            <div class="alert alert-success mt-4">
+                {{ session()->get('success')}}
+            </div>
+        @endif
         @yield('content')
     </div>
 </body>

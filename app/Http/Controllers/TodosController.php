@@ -48,6 +48,9 @@ class TodosController extends Controller
         // save to db
         $todo->save();
 
+        // flash messages or notifications
+        session()->flash('success', 'Todo created successfully');
+        
         // redirect to another page
         return redirect('/todos');
     }
@@ -69,6 +72,9 @@ class TodosController extends Controller
 
         $data = request()->all();
 
+        // flash messages or notifications
+        session()->flash('success', 'Todo updated successfully');
+        
         // find the todo by id
         $todo = Todo::find($todoid);
 
@@ -87,7 +93,21 @@ class TodosController extends Controller
         // delete todo in the database
         $todo->delete();
 
+         // flash messages or notifications
+         session()->flash('success', 'Todo deleted successfully');
+
         // route back to todos page after deletion
+        return redirect('/todos');
+    }
+
+    public function complete($todoid){
+
+        $todo = Todo::find($todoid);
+        $todo->completed = true;
+        $todo->save();
+
+        session()->flash('success', 'Todo completed successfully');
+
         return redirect('/todos');
     }
 }
